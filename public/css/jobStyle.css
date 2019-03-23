@@ -1,0 +1,49 @@
+body {
+    background-color: white;
+}
+
+#main-navbar * {
+    padding-right: 10px;
+    vertical-align: center;
+}
+
+span {
+    font-size: 40px;
+}
+
+.menu-title {
+    border-bottom: 5px solid black;
+}
+
+#logo {
+    width: 50px;
+}
+
+#add-form {
+    width: 100%;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+}
+
+#list {
+    margin-top: 20px;
+    
+}
+
+ul > div {
+    background-color: rgb(201, 201, 201);
+    width: 100%;
+    font-size: 20px;
+}
+
+#list-div * {
+   width: 100%;
+}
+
+#submit {
+    margin-top: 10%;
+}
+
+
+

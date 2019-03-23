@@ -1,0 +1,41 @@
+<div class="w-100" id="content">
+    <button id="change-menu"></button>
+    <div class="row">
+        <h1 id="menu-title" class="col-lg-2 col-md-4 col-sm-6 col-xs-6 menu-title">Add Job</h1>
+        <h1 id="job-title" class="col-lg-10 col-md-8 col-sm-6 col-xs-6 menu-title">My Jobs</h1>
+    </div>
+    <div class="row">
+    <div id="form" class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
+        <div class="input-group input-group-large">
+            <form id="addJob">
+            <span class="input-group-addon">Company</span><input id="company" placeholder="apple..." type="text" class="form-control">
+            <span class="input-group-addon">Position</span><input id="position" placeholder="software dev..." type="text" class="form-control">
+            <span class="input-group-addon">Location</span><input id="location" placeholder="cali..." type="text" class="form-control">
+            <span class="input-group-addon">Salary</span><input id="salary" placeholder="1,000,000" type="number" class="form-control">
+            <span class="input-group-addon">Ranking</span><input id="ranking" type="number" class="form-control">
+            <button type="button" class ="btn-sm w-100" id="submit">Add Job</button>
+            </form>
+        </div>
+    </div>
+    <div id="sort-menu" class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
+            <input type="text" id="search-input" onclass="input-group" onkeyup="filterJobs()" class="w-100">
+            <a class="btn btn-secondary dropdown-toggle w-100" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Sort by...
+                  </a>
+                
+                  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item" href="javascript:sortByComp();">Company Name</a>
+                    <a class="dropdown-item" href="javascript:sortByPos();">Position</a>
+                    <a class="dropdown-item" href="javascript:sortByLoc();">Location</a>
+                    <a class="dropdown-item" href="javascript:sortByRank();">Rank</a>
+                    <a class="dropdown-item" href="javascript:sortBySal();">Pay</a>
+                  </div>
+                  
+    </div>
+    <div class="col-lg-10 col-md-8 col-sm-6 col-xs-6 d-flexjustify-content-center" id="list-div">
+        <ul id="list">
+
+        </ul>
+    </div>
+
+</div>
