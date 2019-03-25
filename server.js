@@ -52,11 +52,20 @@ app.get('/', function(req, res) {
      res.render('login');
  });
 
-app.get('/jobScreen', function(req, res) {
+app.get('/jobScreen/:parameter', function(req, res) {
 
     if (typeof(req.session.username) != "undefined") {
         let username = req.session.username;
-        connection.query('SELECT * FROM job WHERE userID = ?', username, function(error, results, fields) {
+        let orderBy = req.params.parameter;
+        let orderMethod = 'ASC';
+        orderBy = orderBy.slice(1);
+
+        if (orderBy == 'ranking' || orderBy == 'salaryHour') {
+            orderMethod = 'DESC';
+        }
+
+        let query = 'SELECT * FROM job WHERE userID = \"' + username + '\" ORDER BY ' + orderBy + ' ' + orderMethod;
+        connection.query(query, function(error, results, fields) {
             console.log(results[0]);
             res.render('jobScreen', {'data': results});
         });
@@ -114,7 +123,7 @@ app.post('/auth', function(request, response) {
 			if (results.length > 0) {
 				request.session.loggedin = true;
 				request.session.username = username;
-				response.redirect('/jobScreen');
+				response.redirect('/jobScreen/:dateInserted');
 			} else {
 				response.redirect('/login');
 			}			
@@ -139,12 +148,12 @@ app.post('/insert-job', function(request, response) {
         response.end();
     } else {
         console.log(company + salary + location + position + ranking + " " + userID);
-        connection.query('INSERT INTO job VALUES (?, ?, ?, ?, ?, NULL, ?)', [company, position, location, salary, ranking, userID], function (error, results, fields) {
+        connection.query('INSERT INTO job VALUES (?, ?, ?, ?, ?, NULL, ?, NOW())', [company, position, location, salary, ranking, userID], function (error, results, fields) {
             if (error) {
                 throw err;
             }
         });
-        response.redirect('/jobScreen');
+        response.redirect('/jobScreen/:dateInserted');
         response.end();
     }
 });
@@ -157,10 +166,12 @@ app.get('/delete/:id', function (req, res) {
             console.log('Could not delete form table');
         }
 
-        res.redirect('/jobScreen');
+        res.redirect('/jobScreen/:dateInserted');
         res.end();
     });
 });
+
+
 
 
 console.log("App listening on port 3000");
