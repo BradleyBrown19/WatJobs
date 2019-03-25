@@ -149,7 +149,18 @@ app.post('/insert-job', function(request, response) {
     }
 });
 
+app.get('/delete/:id', function (req, res) {
+    let jobID = req.params.id;
+    
+    connection.query('DELETE FROM job WHERE jobID = ?', jobID, function(error, results, fields) {
+        if  (error) {
+            console.log('Could not delete form table');
+        }
 
+        res.redirect('/jobScreen');
+        res.end();
+    });
+});
 
 
 console.log("App listening on port 3000");
