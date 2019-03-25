@@ -52,13 +52,16 @@ let btn = document.getElementById('submit');
 let changeMenu = document.getElementById('change-menu');
 let addJobMenu = document.getElementById('form');
 let sortJobMenu = document.getElementById('sort-menu');
-sortJobMenu.style.display = 'none';
 let menuTitle = document.getElementById('menu-title');
 let onAddJob = true;
 let jobSearch = document.getElementById('search-input');
 let classMap = new Map();
+let username = document.getElementById('usernameBox');
+
+alert(transfer);
 
 //Toggle between add jobs and sort jobs
+/*
 changeMenu.addEventListener('click', function() {
     if (onAddJob) {
         changeMenu.innerHTML = "Add Job";
@@ -77,6 +80,7 @@ changeMenu.addEventListener('click', function() {
         filterJobs();
     }
 });
+*/
 
 //adding new jobs
 btn.addEventListener('click', function() {
@@ -180,9 +184,5 @@ function filterJobs() {
 }
 
 
-
-
-let tester = document.getElementById("header");
-tester.innerHTML = "WatJobs";
 
 

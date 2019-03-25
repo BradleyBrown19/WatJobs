@@ -15,6 +15,10 @@ span {
     border-bottom: 5px solid black;
 }
 
+#accountbox {
+    background-color: pink;
+}
+
 #logo {
     width: 50px;
 }
@@ -28,6 +32,11 @@ span {
 #list {
     margin-top: 20px;
     
+}
+
+#account {
+    background-color: red;
+    margin-left: 80%;
 }
 
 ul > div {

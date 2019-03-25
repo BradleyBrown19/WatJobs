@@ -47,10 +47,23 @@ app.use(session({
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 
-
 app.get('/', function(req, res) {
-   console.log(req.session.username);
-    res.render('jobScreen');
+    console.log(req.session.username);
+     res.render('login');
+ });
+
+app.get('/jobScreen', function(req, res) {
+
+    if (typeof(req.session.username) != "undefined") {
+        let username = req.session.username;
+        connection.query('SELECT * FROM job WHERE userID = ?', username, function(error, results, fields) {
+            console.log(results[0]);
+            res.render('jobScreen', {'data': results});
+        });
+    } else {
+        res.render('jobScreen');
+    }
+    
 });
 
 app.get('/addjob', function(req, res) {
@@ -101,7 +114,7 @@ app.post('/auth', function(request, response) {
 			if (results.length > 0) {
 				request.session.loggedin = true;
 				request.session.username = username;
-				response.redirect('/');
+				response.redirect('/jobScreen');
 			} else {
 				response.redirect('/login');
 			}			
@@ -119,26 +132,24 @@ app.post('/insert-job', function(request, response) {
     let location = request.body.location;
     let salary = request.body.salary;
     let ranking = request.body.ranking;
-    console.log(company + position + location + salary + ranking);
-    let userID;
-    connection.query('SELECT userID FROM user WHERE username = ?', request.session.username,  function (error, results, fields) {
-        userID = console.log(results[0].userID);
-    });
-    //console.log(userID);
+    let userID = request.session.username;
 
     if (typeof(request.session.username) == "undefined") {
         response.redirect('/login');
         response.end();
     } else {
-        connection.query('INSERT INTO job VALUES (?,?,?,?,?,?,NULL)', [company, position, location, salary, ranking, userID], function (error, results, fields) {
+        console.log(company + salary + location + position + ranking + " " + userID);
+        connection.query('INSERT INTO job VALUES (?, ?, ?, ?, ?, NULL, ?)', [company, position, location, salary, ranking, userID], function (error, results, fields) {
             if (error) {
                 throw err;
             }
         });
-        response.redirect('/');
+        response.redirect('/jobScreen');
         response.end();
     }
 });
+
+
 
 
 console.log("App listening on port 3000");
