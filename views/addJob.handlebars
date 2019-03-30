@@ -1,11 +1,11 @@
 <div id="add-form">
         <div class="input-group input-group-large">
             <form id="addJob" action="insert-job" method="POST">
-            <span class="input-group-addon">Company</span><input id="company" name="company" placeholder="apple..." type="text" class="form-control">
-            <span class="input-group-addon">Position</span><input id="position" name="position" placeholder="software dev..." type="text" class="form-control">
-            <span class="input-group-addon">Location</span><input id="location" name="location" placeholder="cali..." type="text" class="form-control">
-            <span class="input-group-addon">Salary</span><input id="salary" name="salary" placeholder="1,000,000" type="number" class="form-control">
-            <span class="input-group-addon">Ranking</span><input id="ranking" name="ranking" type="number" class="form-control">
+            <span class="input-group-addon">Company</span><input id="company" name="company" placeholder="apple..." type="text" class="form-control" required>
+            <span class="input-group-addon">Position</span><input id="position" name="position" placeholder="software dev..." type="text" class="form-control" required>
+            <span class="input-group-addon">Location</span><input id="location" name="location" placeholder="cali..." type="text" class="form-control" required>
+            <span class="input-group-addon">Salary</span><input id="salary" name="salary" placeholder="1,000,000" type="number" class="form-control" required>
+            <span class="input-group-addon">Ranking</span><input id="ranking" name="ranking" type="number" class="form-control" required>
             <button type="submit" class ="btn-sm w-100" id="submit">Add Job</button>
             </form>
         </div>

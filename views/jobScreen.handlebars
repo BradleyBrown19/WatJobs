@@ -4,35 +4,55 @@
         <h1 id="job-title" class="col-lg-10 col-md-8 col-sm-6 col-xs-6 menu-title">My Jobs</h1>
     </div>
     <div class="row">
-    <div id="sort-menu" class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-            <input type="text" id="search-input" onclass="input-group" onkeyup="filterJobs()" class="w-100">
+    <div id="sort-menu" class="col-lg-2 col-md-4 col-sm-4 col-xs-6">
+        <form action="search" method="POST">
+            <input type="text" id="searchInput" name="searchInput" onclass="input-group" class="w-100">
+            <input type="submit">
+        </form>
             <a class="btn dropdown-toggle w-100" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Sort by...
                   </a>
                 
                   <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="/jobScreen/:company">Company Name</a>
-                    <a class="dropdown-item" href="/jobScreen/:position">Position</a>
-                    <a class="dropdown-item" href="/jobScreen/:location">Location</a>
-                    <a class="dropdown-item" href="/jobScreen/:ranking">Rank</a>
-                    <a class="dropdown-item" href="/jobScreen/:salaryHour">Pay</a>
+                    <ul style="list-style: none;">
+                        <li><a class="dropdown-item" href="/jobScreen/:company">Company Name</a></li>
+                        <li><a class="dropdown-item" href="/jobScreen/:position">Position</a></li>
+                        <li><a class="dropdown-item" href="/jobScreen/:location">Location</a></li>
+                        <li><a class="dropdown-item" href="/jobScreen/:ranking">Rank</a></li>
+                        <li><a class="dropdown-item" href="/jobScreen/:salaryHour">Pay</a></li>
+                    </ul>
                   </div>
                   
     </div>
-    <div class="col-lg-10 col-md-8 col-sm-6 col-xs-6 d-flexjustify-content-center" id="list-div">
-       <div class="container">
+    <div class="col-lg-8 col-md-6 col-sm-7 col-xs-6" id="list-div">
            {{#each data}}
-           <div class="container border">
-               <h3>{{this.company}}</h3> 
-               <ul>
-                   <li>{{this.position}}</li>
-                   <li>{{this.location}}</li>
-                   <li>{{this.salaryHour}}</li>
-                   <li>{{this.ranking}}</li>
-                   <li><a href="/delete/{{this.jobID}}" class="btn btn-small btn-danger">Delete</a></li>
-               </ul>
-           </div>
+                <div class="row">
+                    <div class="col-sm">
+                        <h3>{{this.company}}</h3>
+                    </div>
+                    <div class="col-sm">
+                        <h3><a href="/delete/{{this.jobID}}">&#x2702</a></h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <h4 class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Job Title: {{this.position}}</h4>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <h4 class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Location: {{this.location}}</h4>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <h4 class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Salary: {{this.salaryHour}} </h4>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                        <h4 class="col-lg-6 col-md-6 col-sm-6 col-xs-6">Ranking: {{this.ranking}}</h4>
+                    </div>
+                </div>
            {{/each}}
-       </div>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-1 col-xs-0">
+
     </div>
 </div>

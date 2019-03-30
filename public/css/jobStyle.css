@@ -7,12 +7,23 @@ body {
     vertical-align: center;
 }
 
+
 span {
     font-size: 40px;
 }
 
 .menu-title {
     border-bottom: 5px solid black;
+}
+
+.job-box {
+    background-color: rgb(202, 202, 202);
+    border: 2px gray solid;
+}
+
+.delete-button {
+    width: 10%;
+    background-color: blue;
 }
 
 #accountbox {

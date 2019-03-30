@@ -9,16 +9,18 @@
         <span class="icon-bar"></span>
       </button>
       <a class="pull-left" href="#"><img src="/images/logo.png" id="logo"></a>
+      <a class="navbar-brand">WatJobs</a>
       </div>
 
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav align-middle" id="main-navbar">
-          <li><a href="/jobScreen/:Date">JobList</a></li>
+          <li><a href="/jobScreen/:dateInserted">JobList</a></li>
           <li><a href="/addJob">Add Job</a></li>
-          <li><a href="/login">Login</a></li>
-          <li><a href="/createAccount">Create Account</a></li>
           <li><a href="/about">About</a></li>
-          <li id="usernameBox">Not Logged In</li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right align-middle">
+          <li><a id="usernameBox" href="/login">{{username}}</a></li>
+          <li><a href="/createAccount">Create Account</a></li>
         </ul>
     </div>
   </nav>

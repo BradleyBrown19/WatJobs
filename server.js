@@ -49,7 +49,7 @@ app.use(bodyParser.json());
 
 app.get('/', function(req, res) {
     console.log(req.session.username);
-     res.render('login');
+    res.render('login');
  });
 
 app.get('/jobScreen/:parameter', function(req, res) {
@@ -61,30 +61,42 @@ app.get('/jobScreen/:parameter', function(req, res) {
         orderBy = orderBy.slice(1);
 
         if (orderBy == 'ranking' || orderBy == 'salaryHour') {
-            orderMethod = 'DESC';
+            let query = 'SELECT * FROM job WHERE userID = \"' + username + '\" ORDER BY ' + orderBy + ' ' + orderMethod;
         }
-
+        console.log(username);
         let query = 'SELECT * FROM job WHERE userID = \"' + username + '\" ORDER BY ' + orderBy + ' ' + orderMethod;
         connection.query(query, function(error, results, fields) {
-            console.log(results[0]);
-            res.render('jobScreen', {'data': results});
+            //console.log(results[0]);
+            res.render('jobScreen', {'data': results, 'username': username});
         });
     } else {
-        res.render('jobScreen');
+        res.render('jobScreen', {'username': "Log In"});
     }
     
 });
 
 app.get('/addjob', function(req, res) {
-    res.render('addJob');
+    if (typeof(req.session.username) != "undefined") {
+        res.render('addJob', {'username': req.session.username});
+    } else {
+        res.render('addJob', {'username': "Log In"});
+    }
 });
 
 app.get('/login', function(req, res) {
-    res.render('login');
+    if (typeof(req.session.username) != "undefined") {
+        res.render('login', {'username': req.session.username});
+    } else {
+        res.render('login', {'username': "Log In"});
+    }
 });
 
 app.get('/createAccount', function(req, res) {
-    res.render('createAccount');
+    if (typeof(req.session.username) != "undefined") {
+        res.render('createAccount', {'username': req.session.username});
+    } else {
+        res.render('createAccount', {'username': "Log In"});
+    }
 });
 
 app.post('/create-account', function(request, response) {
@@ -101,7 +113,7 @@ app.post('/create-account', function(request, response) {
                         console.log('Error inserting into database');
                     }
                 });
-                response.redirect('/')
+                response.redirect('/login')
 			} else {
                 console.log('Username already exists, would you like to log in?');
                 response.redirect('createAccount');
@@ -125,6 +137,7 @@ app.post('/auth', function(request, response) {
 				request.session.username = username;
 				response.redirect('/jobScreen/:dateInserted');
 			} else {
+                //Send an invalid account alert
 				response.redirect('/login');
 			}			
 			response.end();
@@ -171,7 +184,15 @@ app.get('/delete/:id', function (req, res) {
     });
 });
 
+app.post('/jobScreen/search', function(req, res) {
+   let searchText = req.body.searchInput; 
+   let username = req.session.username;
+   let query = "select * from job where userID = \"" + username + "\" and company like \"%" + searchText + "%\"";
+   console.log(query);
 
-
+   connection.query(query, function(error, results, fields) {
+        res.render('jobScreen', {'data': results, 'username': username});
+   });
+});
 
 console.log("App listening on port 3000");
